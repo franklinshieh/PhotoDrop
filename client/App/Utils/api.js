@@ -1,7 +1,7 @@
 var api = {
   login(username, password){
     var user = {username: username, password: password};
-    var url = 'http://127.0.0.1:8000/login';
+    var url = 'http://45.55.23.71:8000/login';
     return fetch(url, {
       method: "POST",
       body: JSON.stringify(user)
@@ -10,14 +10,14 @@ var api = {
 
   signup(username, password){
     var user = {username: username, password: password};
-    return fetch('http://127.0.0.1:8000/signup', {
+    return fetch('http://45.55.23.71:8000/signup', {
       method: 'POST',
       body: JSON.stringify(user)
     });
 },
 
   uploadPhoto(data, coordinates) {
-    var url = 'http://127.0.0.1:8000/imgUpload';
+    var url = 'http://45.55.23.71:8000/imgUpload';
     return fetch(url, {
       method: "POST",
       headers: {
