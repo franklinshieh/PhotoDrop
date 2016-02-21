@@ -13,8 +13,8 @@ import React, {
 } from 'react-native';
 import Camera from 'react-native-camera';
 
-var LATITUDE = 37; //set arbitrary starting value so react can render immediatedly without an error
-var LONGITUDE = 122; //set arbitrary starting value so react can render immediatedly without an error
+var LATITUDE;
+var LONGITUDE;
 
 navigator.geolocation.getCurrentPosition(
   location => {
