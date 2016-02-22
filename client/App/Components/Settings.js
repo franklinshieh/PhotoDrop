@@ -4,7 +4,6 @@ var NavigationBar = require('react-native-navbar');
 var Login = require('./Login');
 var PhotosView = require('./PhotosView');
 
-
 var {
   Text,
   View,
@@ -54,6 +53,7 @@ var styles = StyleSheet.create({
 });
 
 class Settings extends React.Component {
+
   constructor(props) {
     super(props);
     this.displayName = 'Settings';
@@ -64,16 +64,21 @@ class Settings extends React.Component {
       component: PhotosView
     });
   }
+  
   logout() {
     this.props.navigator.push({
       component: Login
     });
   }
 
+  componentDidMount() {
+    console.log('mounted settings......................');
+  }
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#ff9900'}}> 
-        <NavigationBar title={{title: 'Settings'}}/>
+        <NavigationBar title={{title: 'Settings', tintColor: 'white'}} tintColor={'black'}/>
 
         <View style={styles.mainContainer}>
           <TouchableHighlight

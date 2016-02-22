@@ -9,7 +9,9 @@ var {
   StyleSheet,
   TextInput,
   TouchableHighlight,
-  ActivityIndicatorIOS
+  ActivityIndicatorIOS,
+  StatusBarIOS,
+  StatusBar
 } = React;
 
 var styles = StyleSheet.create({
@@ -84,6 +86,17 @@ class Signup extends React.Component {
         error: false,
         passwordError: false
       };
+    }
+
+    componentDidMount() {
+      // StatusBarIOS.setStyle('light-content');
+      console.log('mounted signup......................');
+    }
+
+    componentWillUnmount() {
+      console.log('unmounted signup......................');
+      // StatusBarIOS.setHidden(false);
+      // StatusBarIOS.setStyle('light-content', false);
     }
 
     handleUsernameChange(event) {
@@ -164,9 +177,11 @@ class Signup extends React.Component {
     var showPasswordErr = (
       this.state.passwordError ? <Text style={styles.err}> {this.state.passwordError} </Text> : <View></View>
       );
+    StatusBarIOS.setStyle('light-content'); 
     return (
       <View style={{flex: 1}}> 
-        <NavigationBar title={{title: 'PROFOUND MONGOOSE'}} />
+        <StatusBar barStyle="light-content"/>
+        <NavigationBar title={{title: 'PROFOUND MONGOOSE', tintColor: 'white'}} tintColor={'black'} statusBar={{style: 'light-content'}}/>
 
         <View style={styles.mainContainer}>
         <Text style={styles.title}> Profound Mongoose </Text>

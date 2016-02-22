@@ -11,39 +11,36 @@ var {
   TouchableOpacity,
   Image,
   TouchableHighlight,
+  StatusBarIOS
   } = React;
 
-
-var { width, height } = Dimensions.get('window');
-
-var ASPECT_RATIO = width / height;
-var LATITUDE; 
-var LONGITUDE;
-var LATITUDE_DELTA = 0.005;
-var LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-//get the initial position
-navigator.geolocation.getCurrentPosition(
-  location => {
-    LATITUDE = location.coords.latitude;
-    LONGITUDE = location.coords.longitude;
-  }
-);
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.005;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class Overlays extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
+      isFirstLoad: true,
       userLocation: { //where the user actually is
-        latitude: LATITUDE,
-        longitude: LONGITUDE
+        latitude: 0,
+        longitude: 0
       },
       region: {  //where the center of the map view is (changes as you pan around)
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
+        latitude: 37, //give it an arbitrary initial value so this.state.region.latitude.toPrecision(7)}, ${this.state.region.longitude.toPrecision(7) is not undefined
+        longitude: -122, //give it an arbitrary initial value so this.state.region.latitude.toPrecision(7)}, ${this.state.region.longitude.toPrecision(7) is not undefined
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
+      },
+      circle: {
+        center: {
+          latitude: 0,
+          longitude: 0
+        },
+        radius: 50,
       }
     };
   }
@@ -61,6 +58,13 @@ class Overlays extends React.Component{
           userLocation: {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude
+          },
+          circle: {
+            center: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            },
+            radius: 50,
           }
         });
       },
@@ -69,13 +73,74 @@ class Overlays extends React.Component{
           message: 'There was a problem with obtaining your location: ' + error
         });
       });
+    console.log(this.state);
   }
+
+  // componentDidMount() {
+  //   console.log('mounted mapView......................');
+  //   // console.log(this.props.userLocationData);
+  // }
+
+  // componentWillMount() {
+  //   console.log('pre did mounted mapView......................');
+  //   navigator.geolocation.getCurrentPosition(
+  //     location => {
+  //       this.setState({
+  //         region: {
+  //           latitude: location.coords.latitude,
+  //           longitude: location.coords.longitude,
+  //           latitudeDelta: LATITUDE_DELTA,
+  //           longitudeDelta: LONGITUDE_DELTA
+  //         },
+  //         userLocation: {
+  //           latitude: location.coords.latitude,
+  //           longitude: location.coords.longitude
+  //         }
+  //       });
+  //     });
+  //   // console.log(this.state);
+
+  // }
+
+  // componentDidMount() {
+  //   console.log('unmounted mapView......................');
+  //   // console.log(this.props.userLocationData);
+  //       console.log(this.state);
+  // }
 
   onRegionChange(region) {
     this.setState({ region });
   }
 
   render() {
+    console.log(this.state);
+    StatusBarIOS.setHidden(true);
+
+    if(this.state.isFirstLoad) {
+      console.log('..........firstLoad');
+      navigator.geolocation.getCurrentPosition(
+        location => {
+          this.setState({
+            isFirstLoad: false,
+            region: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            },
+            userLocation: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            },
+            circle: {
+              center: {
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+              },
+              radius: 50,
+            }
+          });
+        });
+    }
+
     return (
       <View style={styles.container}>
         <MapView
@@ -93,8 +158,8 @@ class Overlays extends React.Component{
           </MapView.Marker>
 
           <MapView.Circle
-            center={this.state.userLocation} //TODO: Needs Fixing
-            radius={50} //TODO: calculate how big it should be
+            center={this.state.circle.center} //TODO: Needs Fixing
+            radius={this.state.circle.radius} //TODO: calculate how big it should be
             fillColor="rgba(200, 0, 0, 0.5)"
             strokeColor="rgba(0,0,0,0.5)"
           />

@@ -11,7 +11,7 @@ var {
   TextInput,
   TouchableHighlight,
   ActivityIndicatorIOS, 
-  StatusBar
+  StatusBarIOS,
 } = React;
 
 var styles = StyleSheet.create({
@@ -86,6 +86,17 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // StatusBarIOS.setStyle('light-content');
+    console.log('mounted login');
+  }
+
+  componentWillUnmount() {
+    console.log('unmounted login......................');
+    // StatusBarIOS.setHidden(false);
+    // StatusBarIOS.setStyle('light-content');
+  }
+
   handleUsernameChange (event) {
     this.setState({
       username: event.nativeEvent.text
@@ -149,7 +160,7 @@ class Login extends React.Component {
       );
     return (
       <View style={{flex: 1}}> 
-        <NavigationBar title={{title: 'PROFOUND MONGOOSE'}} />
+      <NavigationBar title={{title: 'PROFOUND MONGOOSE', tintColor: 'white'}} tintColor={'black'} statusBar={{style: 'light-content'}}/>
 
         <View style={styles.loginContainer}>
         <Text style={styles.title}> Profound Mongoose </Text>

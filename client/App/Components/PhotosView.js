@@ -11,7 +11,8 @@ var {
   Dimensions,
   Image,
   ScrollView,
-  ActivityIndicatorIOS
+  ActivityIndicatorIOS,
+  StatusBarIOS
 } = React;
 
 var {width, height} = Dimensions.get('window');
@@ -45,6 +46,16 @@ class ReactNativeLayouts extends React.Component{
     })
   }
 
+  componentDidMount() {
+    console.log("mounted photosView.......................");
+  }
+
+  componentWillUnmount() {
+    console.log('unmounted photosView......................');
+    // console.log(this.props.userLocationData);
+    StatusBarIOS.setHidden(true);
+  }
+
   handleRotation(event) {
     var layout = event.nativeEvent.layout;
     this.setState({currentScreenWidth: layout.width, currentScreenHeight: layout.height });
@@ -76,7 +87,7 @@ class ReactNativeLayouts extends React.Component{
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <NavigationBar  title={{title: 'Swipe Down to Dismiss'}} />
+        <NavigationBar title={{title: 'Swipe Down to Dismiss', tintColor: 'white'}} tintColor={'black'} statusBar={{style: 'light-content'}}/>
         <ScrollView onLayout={this.handleRotation.bind(this)} contentContainerStyle={styles.scrollView}>
           {this.state.imageUrls ? this.renderRow(this.state.imageUrls) : <ActivityIndicatorIOS size={'large'} style={styles.centering} />}
         </ScrollView>

@@ -10,6 +10,7 @@ import React, {
   TouchableHighlight,
   NativeModules,
   View,
+  StatusBarIOS,
 } from 'react-native';
 import Camera from 'react-native-camera';
 
@@ -52,7 +53,19 @@ class CameraView extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.log('mounted camera......................');
+    // StatusBarIOS.setHidden(true);
+  }
+
+  componentWillMount() {
+    console.log('unmounted photosView......................');
+    // console.log(this.props.userLocationData);
+    // StatusBarIOS.setHidden(true);
+  }
+
   render() {
+    StatusBarIOS.setHidden(true);
     return (
       <View style={styles.container}>
         <Camera
