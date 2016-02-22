@@ -26,8 +26,8 @@ class Overlays extends React.Component{
     this.state = {
       isFirstLoad: true,
       userLocation: { //where the user actually is
-        latitude: 0,
-        longitude: 0
+        latitude: 37, //arbitrary starting value
+        longitude: -122 //arbitrary starting value
       },
       region: {  //where the center of the map view is (changes as you pan around)
         latitude: 37, //give it an arbitrary initial value so this.state.region.latitude.toPrecision(7)}, ${this.state.region.longitude.toPrecision(7) is not undefined
@@ -37,8 +37,8 @@ class Overlays extends React.Component{
       },
       circle: {
         center: {
-          latitude: 0,
-          longitude: 0
+          latitude: 37, //arbitrary starting value
+          longitude: -122 //arbitrary starting value
         },
         radius: 50,
       }

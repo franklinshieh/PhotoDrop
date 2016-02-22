@@ -39,7 +39,6 @@ var styles = StyleSheet.create({
 });
 
 class ProfoundMongoose extends React.Component {
-
   render() {
     return (
       <Navigator 
