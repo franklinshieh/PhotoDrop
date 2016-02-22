@@ -88,17 +88,6 @@ class Signup extends React.Component {
       };
     }
 
-    componentDidMount() {
-      // StatusBarIOS.setStyle('light-content');
-      console.log('mounted signup......................');
-    }
-
-    componentWillUnmount() {
-      console.log('unmounted signup......................');
-      // StatusBarIOS.setHidden(false);
-      // StatusBarIOS.setStyle('light-content', false);
-    }
-
     handleUsernameChange(event) {
       this.setState({
         username: event.nativeEvent.text

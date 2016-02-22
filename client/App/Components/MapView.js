@@ -73,40 +73,7 @@ class Overlays extends React.Component{
           message: 'There was a problem with obtaining your location: ' + error
         });
       });
-    console.log(this.state);
   }
-
-  // componentDidMount() {
-  //   console.log('mounted mapView......................');
-  //   // console.log(this.props.userLocationData);
-  // }
-
-  // componentWillMount() {
-  //   console.log('pre did mounted mapView......................');
-  //   navigator.geolocation.getCurrentPosition(
-  //     location => {
-  //       this.setState({
-  //         region: {
-  //           latitude: location.coords.latitude,
-  //           longitude: location.coords.longitude,
-  //           latitudeDelta: LATITUDE_DELTA,
-  //           longitudeDelta: LONGITUDE_DELTA
-  //         },
-  //         userLocation: {
-  //           latitude: location.coords.latitude,
-  //           longitude: location.coords.longitude
-  //         }
-  //       });
-  //     });
-  //   // console.log(this.state);
-
-  // }
-
-  // componentDidMount() {
-  //   console.log('unmounted mapView......................');
-  //   // console.log(this.props.userLocationData);
-  //       console.log(this.state);
-  // }
 
   onRegionChange(region) {
     this.setState({ region });
@@ -117,7 +84,6 @@ class Overlays extends React.Component{
     StatusBarIOS.setHidden(true);
 
     if(this.state.isFirstLoad) {
-      console.log('..........firstLoad');
       navigator.geolocation.getCurrentPosition(
         location => {
           this.setState({

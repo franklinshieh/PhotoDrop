@@ -46,13 +46,7 @@ class ReactNativeLayouts extends React.Component{
     })
   }
 
-  componentDidMount() {
-    console.log("mounted photosView.......................");
-  }
-
   componentWillUnmount() {
-    console.log('unmounted photosView......................');
-    // console.log(this.props.userLocationData);
     StatusBarIOS.setHidden(true);
   }
 

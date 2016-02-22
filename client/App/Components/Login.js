@@ -86,17 +86,6 @@ class Login extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // StatusBarIOS.setStyle('light-content');
-    console.log('mounted login');
-  }
-
-  componentWillUnmount() {
-    console.log('unmounted login......................');
-    // StatusBarIOS.setHidden(false);
-    // StatusBarIOS.setStyle('light-content');
-  }
-
   handleUsernameChange (event) {
     this.setState({
       username: event.nativeEvent.text

@@ -21,10 +21,6 @@ class MainPhotosMarker extends React.Component{
     });
   }
 
-  componentDidMount() {
-    console.log('mounted photomarker......................');
-  }
-
   render() {
     return (
         <View style={styles.container}>

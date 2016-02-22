@@ -71,10 +71,6 @@ class Settings extends React.Component {
     });
   }
 
-  componentDidMount() {
-    console.log('mounted settings......................');
-  }
-
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#ff9900'}}> 

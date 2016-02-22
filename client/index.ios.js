@@ -40,10 +40,6 @@ var styles = StyleSheet.create({
 
 class ProfoundMongoose extends React.Component {
 
-  componentDidMount() {
-    console.log('mounted index.....................');
-  }
-
   render() {
     return (
       <Navigator 
